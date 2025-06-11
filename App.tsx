@@ -1,76 +1,45 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React from 'react';
-import type {PropsWithChildren} from 'react';
+import React, {useState} from 'react';
 import {
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
   View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  useColorScheme,
+  StatusBar,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+const words = [
+  {fi: 'omena', en: 'apple'},
+  {fi: 'kirja', en: 'book'},
+  {fi: 'koira', en: 'dog'},
+  {fi: 'aurinko', en: 'sun'},
+  {fi: 'vesi', en: 'water'},
+];
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
+  const [index, setIndex] = useState(0);
+  const [showTranslation, setShowTranslation] = useState(false);
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    flex: 1,
+    backgroundColor: isDarkMode ? '#111' : '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 20,
   };
 
-  /*
-   * To keep the template simple and small we're adding padding to prevent view
-   * from rendering under the System UI.
-   * For bigger apps the recommendation is to use `react-native-safe-area-context`:
-   * https://github.com/AppAndFlow/react-native-safe-area-context
-   *
-   * You can read more about it here:
-   * https://github.com/react-native-community/discussions-and-proposals/discussions/827
-   */
-  const safePadding = '5%';
+  const currentWord = words[index];
+
+  const nextWord = () => {
+    setShowTranslation(false);
+    setIndex((prev) => (prev + 1) % words.length);
+  };
+
+  const prevWord = () => {
+    setShowTranslation(false);
+    setIndex((prev) => (prev - 1 + words.length) % words.length);
+  };
 
   return (
     <View style={backgroundStyle}>
@@ -78,53 +47,74 @@ function App(): React.JSX.Element {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-      <ScrollView
-        style={backgroundStyle}>
-        <View style={{paddingRight: safePadding}}>
-          <Header/>
-        </View>
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-            paddingHorizontal: safePadding,
-            paddingBottom: safePadding,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
+
+      <Text style={[styles.title, {color: isDarkMode ? '#fff' : '#000'}]}>
+        Flashcards
+      </Text>
+
+      <Text style={[styles.word, {color: isDarkMode ? '#fff' : '#000'}]}>
+        {currentWord.fi}
+      </Text>
+
+      {showTranslation && (
+        <Text style={[styles.translation, {color: isDarkMode ? '#aaa' : '#555'}]}>
+          {currentWord.en}
+        </Text>
+      )}
+
+      <TouchableOpacity onPress={() => setShowTranslation(!showTranslation)} style={styles.button}>
+        <Text style={styles.buttonText}>
+          {showTranslation ? 'Piilota käännös' : 'Näytä käännös'}
+        </Text>
+      </TouchableOpacity>
+
+      <View style={styles.navButtons}>
+        <TouchableOpacity onPress={prevWord} style={styles.navButton}>
+          <Text style={styles.navText}>←</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={nextWord} style={styles.navButton}>
+          <Text style={styles.navText}>→</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginBottom: 30,
+  },
+  word: {
+    fontSize: 40,
+    marginBottom: 20,
+  },
+  translation: {
+    fontSize: 30,
+    marginBottom: 20,
+  },
+  button: {
+    backgroundColor: '#4A90E2',
+    paddingVertical: 12,
     paddingHorizontal: 24,
+    borderRadius: 25,
+    marginBottom: 40,
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  navButtons: {
+    flexDirection: 'row',
+    gap: 20,
   },
-  highlight: {
-    fontWeight: '700',
+  navButton: {
+    padding: 15,
+  },
+  navText: {
+    fontSize: 30,
+    color: '#4A90E2',
   },
 });
 
