@@ -41,14 +41,14 @@ _Example view showing grouped flashcards in categories._
 
 3. **Run the application**
 
-   - **iOS**
+   **iOS:**
    ```bash
    npm run ios
    # or
    yarn ios
    ```
 
-   - **Android**
+   **Android:**
    ```bash
    npm run android
    # or
