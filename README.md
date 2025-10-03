@@ -1,4 +1,4 @@
-# 🃏 Flashcards App
+# Flashcards App
 
 A learning tool that allows users to create personalized flashcards, view definitions with a tap, and organize cards into custom categories.  
 Built as a full-stack learning aid, this application demonstrates skills in mobile development, UI/UX interaction, and cross-platform functionality.
@@ -24,7 +24,7 @@ _Example view showing grouped flashcards in categories._
 - **Backend:**  
 - **Platform Support:** iOS, Android
 
-## 🚀 Installation & Setup
+## Installation & Setup
 
 1. **Clone the repository**
    ```bash
