@@ -1,13 +1,12 @@
 # Flashcards
 
-A phone app for drilling Finnish to English vocabulary, the paper flashcard idea
-without the stack of paper. One word at a time, guess the translation in your head,
-tap to check whether you were right, arrow onwards. Right now it is about as simple
-as an app can be while still being useful.
+A mobile app for practising Finnish to English vocabulary. It shows one word at a
+time, reveals the translation on a button press, and moves through the deck with
+arrow buttons.
 
 ## Status
 
-Runs on both iOS and Android, but the whole thing is still one screen and five words.
+Runs on both iOS and Android. Still one screen and five words.
 
 Working right now:
 
@@ -19,10 +18,10 @@ Working right now:
 Not done yet:
 
 - The words are hardcoded in `App.tsx`. There are five of them.
-- No way to add your own cards, which is rather the point of flashcards.
+- No way to add your own cards.
 - No decks or categories, just the one list.
-- Nothing is saved. Close the app and you are back at the first card.
-- No shuffle, and no memory of which words you already know.
+- Nothing is saved. Closing the app returns you to the first card.
+- No shuffle, and no record of which words you already know.
 - The project is still called AwesomeProject in `app.json` and in the native folders.
 
 ## Tech
