@@ -1,38 +1,36 @@
 # Flashcards
 
-A mobile app for practising Finnish to English vocabulary. It shows one word at a
-time, reveals the translation on a button press, and moves through the deck with
-arrow buttons.
+A mobile app for practising Finnish to English vocabulary. Shows one word at a time,
+reveals the translation on a button press, and navigates the deck with arrow buttons.
 
 ## Status
 
-Runs on both iOS and Android. Still one screen and five words.
+Runs on iOS and Android. One screen, five words.
 
-Working right now:
+Implemented:
 
 - One card at a time, showing the Finnish word
-- A button that reveals the English translation and hides it again
-- Arrows for moving back and forth through the deck, wrapping around at the ends
-- Follows the phone's own light or dark setting
+- Button to show and hide the English translation
+- Arrow buttons for navigating the deck, wrapping around at the ends
+- Follows the system light or dark mode
 
-Not done yet:
+Not implemented:
 
-- The words are hardcoded in `App.tsx`. There are five of them.
-- No way to add your own cards.
-- No decks or categories, just the one list.
-- Nothing is saved. Closing the app returns you to the first card.
-- No shuffle, and no record of which words you already know.
-- The project is still called AwesomeProject in `app.json` and in the native folders.
+- Words are hardcoded in `App.tsx` (five words)
+- Adding custom cards
+- Decks or categories
+- Saving progress. The app starts from the first card on every launch.
+- Shuffle and tracking of known words
+- The project is still named AwesomeProject in `app.json` and the native folders
 
 ## Tech
 
-React Native 0.79 with React 19 and TypeScript. No navigation library, no state
-library, no backend; the entire app is one component in `App.tsx` with two pieces of
-`useState` and a plain `StyleSheet`. Dark mode comes from `useColorScheme`, so it
-follows the system setting rather than a toggle in the app.
+React Native 0.79, React 19 and TypeScript. No navigation library, state library or
+backend. The app is one component in `App.tsx` with two `useState` hooks and a
+`StyleSheet`. Dark mode uses `useColorScheme` and follows the system setting.
 
-Node 18 or newer. iOS builds also need Ruby and CocoaPods, installed through the
-bundled Gemfile.
+Requires Node 18 or newer. iOS builds also require Ruby and CocoaPods, installed
+through the included Gemfile.
 
 ## Running it
 
@@ -43,7 +41,7 @@ npm install
 npm start
 ```
 
-Then, in a second terminal:
+In a second terminal:
 
 ```bash
 npm run android
@@ -60,7 +58,7 @@ npm run ios
 ## Layout of the code
 
 ```
-App.tsx          the entire app: word list, card, buttons, styles
+App.tsx          the app: word list, card, buttons, styles
 index.js         registers App with React Native
 app.json         app name, still the template default
 __tests__/       one generated smoke test that renders App
@@ -70,8 +68,8 @@ ios/             native iOS project and Podfile
 
 ## Next up
 
-1. Move the words out of `App.tsx` into their own file
-2. A screen for adding your own cards
-3. Save the deck on the device so it survives a restart
-4. Shuffle, and some way of showing weak words more often
+1. Move the words from `App.tsx` to a separate file
+2. Screen for adding cards
+3. Save the deck on the device
+4. Shuffle, and showing difficult words more often
 5. Rename the project from AwesomeProject
